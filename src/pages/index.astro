@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { version, releaseNotesUrl, changelogUrl, downloads, downloadUrl, type Download } from '../config/release';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'PhotoCull',
+  applicationCategory: 'PhotographyApplication',
+  operatingSystem: 'macOS, Windows',
+  softwareVersion: version,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const formats = [
+  'JPEG', 'HEIC', 'CR2', 'CR3', 'NEF', 'NRW', 'ARW', 'SRF', 'SR2',
+  'DNG', 'RAF', 'ORF', 'RW2', 'PEF', 'RWL', '3FR',
+];
+---
+
+<BaseLayout jsonLd={jsonLd}>
+  <!-- Hero -->
+  <section class="section container">
+    <div class="stack measure">
+      <span class="eyebrow">Free desktop app for photographers</span>
+      <h1>Cull a shoot in minutes, not hours</h1>
+      <p class="lead">
+        PhotoCull groups a shoot into scenes, scores every frame for focus,
+        exposure, eyes-open, and overall aesthetic, then exports your picks as
+        XMP sidecars that Lightroom and Capture One read directly. Runs
+        entirely on your own computer — no account, no upload, no subscription.
+      </p>
+      <div class="tag-row" style="margin-top: 0.5rem">
+        <a class="btn btn-outline" href="#download">Jump to downloads ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section class="section section-soft" id="download">
+    <div class="container">
+      <h2 class="center">Download</h2>
+      <p class="center muted">Version {version} ·{' '}
+        <a href={releaseNotesUrl}>release notes</a></p>
+      <div class="grid grid-3" style="margin-top: 2rem">
+        {downloads.map((d: Download) => (
+          <div class="card download-card">
+            <div class="icon" aria-hidden="true">{d.icon}</div>
+            <div class="platform">{d.platform}</div>
+            <div class="label">{d.label}</div>
+            {d.available ? (
+              <a class="btn btn-primary" href={downloadUrl(d)}>Download</a>
+            ) : (
+              <span class="btn btn-disabled" aria-disabled="true">{d.note}</span>
+            )}
+            {d.size && <div class="meta">{d.size}</div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section class="section container">
+    <h2>Installing</h2>
+
+    <div class="grid grid-2">
+      <div>
+        <h3>🍎 macOS</h3>
+        <ol class="steps">
+          <li>Open the downloaded <code>.dmg</code> file, then drag <strong>PhotoCull</strong> into your Applications folder.</li>
+          <li>The <strong>first time</strong> you open it, don't double-click. Instead, <strong>right-click (or Control-click) the app → Open → Open</strong> in the dialog that appears. After that first time, it opens normally.</li>
+        </ol>
+        <p class="muted">
+          If macOS still refuses with a "damaged" message, open Terminal and run:
+        </p>
+        <p class="hash">xattr -dr com.apple.quarantine "/Applications/PhotoCull.app"</p>
+      </div>
+      <div>
+        <h3>🪟 Windows</h3>
+        <ol class="steps">
+          <li>Run the downloaded installer.</li>
+          <li>If you see a blue "Windows protected your PC" screen, click <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
+          <li>If Windows Defender flags or removes the app, add an exclusion for the PhotoCull install folder, or restore it from quarantine in Windows Security.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="box box-warn" style="margin-top: 2rem">
+      <p class="box-title" style="margin:0"><strong>Both platforms:</strong> the first launch needs an internet connection — PhotoCull downloads its face-detection and RAW-decoding model files the first time it runs. After that, everything works fully offline.</p>
+    </div>
+  </section>
+
+  <!-- Why the warnings -->
+  <section class="section section-soft">
+    <div class="container measure">
+      <h2>Why does my computer warn me about this?</h2>
+      <p>
+        PhotoCull isn't signed with a paid Apple Developer certificate or a
+        Windows code-signing certificate. Those cost money every year, and
+        this is a small, independently-built tool — so both macOS and Windows
+        show you a warning because they can't vouch for who made it. That
+        warning is expected. It doesn't mean the app is unsafe; it means
+        nobody paid to remove the warning.
+      </p>
+      <p>
+        You don't have to take that on faith, though. Verify the file you
+        downloaded matches exactly what was published by checking its SHA-256
+        hash — a unique fingerprint of the exact bytes in the file:
+      </p>
+      {downloads.filter((d) => d.available && d.sha256).map((d) => (
+        <p>
+          <strong>{d.platform} ({d.label}):</strong>
+          <span class="hash">{d.sha256}</span>
+        </p>
+      ))}
+      <p class="muted">
+        On macOS: <code>shasum -a 256 PhotoCull-{version}-macOS-arm64.dmg</code>.
+        On Windows: <code>certutil -hashfile PhotoCull-{version}-Windows-x64.exe SHA256</code>.
+        If the hash you compute doesn't match the one above, don't install it
+        — download it again from this page.
+      </p>
+    </div>
+  </section>
+
+  <!-- What it does with your photos -->
+  <section class="section container">
+    <div class="grid grid-2" style="align-items: center">
+      <div class="stack">
+        <h2>What it does with your photos</h2>
+        <ul class="steps" style="list-style: none; padding-left: 0">
+          <li>✅ Everything runs on your computer — scoring, faces, RAW decoding, all local and offline.</li>
+          <li>✅ No account, no cloud upload, no telemetry.</li>
+          <li>✅ Your picks and ratings are saved next to your photos, in a small database in a <code>.photocull</code> folder inside the shoot itself.</li>
+          <li>✅ Exports write standard <code>.xmp</code> sidecar files next to your originals — nothing is moved or renamed unless you use the optional import tool.</li>
+        </ul>
+      </div>
+      <div class="box box-ok">
+        <h3 class="box-title">Supported formats</h3>
+        <div class="tag-row">
+          {formats.map((f) => <span class="tag">{f}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System requirements -->
+  <section class="section section-soft">
+    <div class="container">
+      <h2>System requirements</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>macOS</h3>
+          <p class="muted" style="margin:0">macOS 10.15 (Catalina) or newer. Apple Silicon (M1 and later) today; an Intel build is coming.</p>
+        </div>
+        <div class="card">
+          <h3>Windows</h3>
+          <p class="muted" style="margin:0">Windows 10 (version 1809) or newer, 64-bit.</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top: 1.5rem">
+        A few hundred MB of disk space for the install. No Python or Node.js
+        needed — everything PhotoCull requires is bundled in.
+      </p>
+    </div>
+  </section>
+
+  <!-- Getting started -->
+  <section class="section container">
+    <h2>Getting started</h2>
+    <p class="measure">
+      Open a shoot folder, and PhotoCull groups it into scenes automatically
+      based on when each photo was taken. Step through with the arrow keys,
+      rate as you go, then export your picks.
+    </p>
+    <div class="hotkey-grid" style="margin-top: 1.5rem">
+      <kbd>← / →</kbd><span>Previous / next photo</span>
+      <kbd>P</kbd><span>Pick</span>
+      <kbd>X</kbd><span>Reject</span>
+      <kbd>U</kbd><span>Clear pick/reject</span>
+      <kbd>0–5</kbd><span>Star rating</span>
+      <kbd>G</kbd><span>Grid view</span>
+      <kbd>C</kbd><span>Compare view</span>
+      <kbd>F</kbd><span>Filters</span>
+      <kbd>E</kbd><span>Export picks</span>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <p>
+      PhotoCull {version} · <a href={releaseNotesUrl}>Release notes</a> ·{' '}
+      <a href={changelogUrl}>All versions</a>
+    </p>
+    <p>Part of <a href="https://infrarg.com">InfraRG</a>.</p>
+  </Fragment>
+</BaseLayout>
