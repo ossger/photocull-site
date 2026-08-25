@@ -34,8 +34,8 @@ export const downloads: Download[] = [
     icon: '🍎',
     available: true,
     file: `PhotoCull-${version}-macOS-arm64.dmg`,
-    // size/sha256 are filled in once the build is uploaded — see the manual
-    // step in vault\Pulse\_manual-steps.md.
+    size: '228 MB',
+    sha256: '0cbb216c9604d7e61f45842794fac7e9cf6a4feda02ccedc8793100796879648',
   },
   {
     id: 'mac-x64',
