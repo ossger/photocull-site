@@ -69,12 +69,13 @@ const formats = [
         <h3>🍎 macOS</h3>
         <ol class="steps">
           <li>Open the downloaded <code>.dmg</code> file, then drag <strong>PhotoCull</strong> into your Applications folder.</li>
-          <li>The <strong>first time</strong> you open it, don't double-click. Instead, <strong>right-click (or Control-click) the app → Open → Open</strong> in the dialog that appears. After that first time, it opens normally.</li>
+          <li>Double-click PhotoCull. macOS will say it can't verify the app — click <strong>Done</strong> (not Move to Trash).</li>
+          <li>Open <strong>System Settings → Privacy &amp; Security</strong>, scroll down to the <strong>Security</strong> section. You'll see a message that PhotoCull was blocked — click <strong>Open Anyway</strong>, then confirm.</li>
+          <li>Double-click PhotoCull once more and confirm <strong>Open Anyway</strong>. After that, it opens normally.</li>
         </ol>
         <p class="muted">
-          If macOS still refuses with a "damaged" message, open Terminal and run:
+          The "Open Anyway" button only appears for a little while after step 2 — if you don't see it, double-click the app again first, then go straight back to System Settings.
         </p>
-        <p class="hash">xattr -dr com.apple.quarantine "/Applications/PhotoCull.app"</p>
       </div>
       <div>
         <h3>🪟 Windows</h3>
