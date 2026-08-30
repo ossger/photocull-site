@@ -15,12 +15,12 @@ Roadmap (if any): `PLAN.md`.
 ## What this is (and isn't)
 
 - This is **not** part of the Golden Bridges / Golden Steps site
-  (`C:\projects\website`). Different audience (photographers, not older
+  (`~/Projects/website`). Different audience (photographers, not older
   adults), different brand, own repo and deploy pipeline. Don't import its
   components, theme, or accessibility toolbar — this site's design is
   intentionally its own (dark-first).
 - This is **not** the PhotoCull app itself. The app's source lives in
-  `C:\projects\Photography` (private repo). This project reads that repo's
+  `~/Projects/Photography` (private repo). This project reads that repo's
   `README.md`, `CHANGELOG.md`, and `packaging/README.md` for content —
   **read-only**. Never write to `Photography` from a session here; a
   correction to the app's own docs belongs in that project.
@@ -45,19 +45,19 @@ build or platform is a config edit, not a template change. See `README.md`
 
 ## Project Pulse — cross-project context
 
-Every project under `C:\projects` publishes a one-screen pulse note into the
+Every project under `~/Projects` publishes a one-screen pulse note into the
 shared Obsidian vault; every session reads them all. Contract + template:
-`C:\projects\vault\Pulse\README.md`.
+`~/Projects/vault/Pulse/README.md`.
 
-- **Session start:** read `C:\projects\vault\Pulse\*.md`.
+- **Session start:** read `~/Projects/vault/Pulse/*.md`.
 - **Session end (substantive work only):** refresh
-  `C:\projects\vault\Pulse\photocull-site.md` — status, now/next, decisions;
+  `~/Projects/vault/Pulse/photocull-site.md` — status, now/next, decisions;
   bump `updated:` — then commit only that file in the vault repo.
 - Edit only this project's own note.
 
 ## Security & data handling
 
-Binding rules: `C:\projects\SECURITY.md` (data tiers + checkpoints).
+Binding rules: `~/Projects/SECURITY.md` (data tiers + checkpoints).
 
 - **Tiers this project produces:** T0 only — a public static site with a
   public GitHub remote. Treat every commit as already published.

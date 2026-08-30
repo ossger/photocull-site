@@ -22,7 +22,7 @@ npm run check    # type-check
 Everything version-specific lives in one file: `src/config/release.ts`. To add
 a platform or bump the version:
 
-1. Build and tag the new version in `C:\projects\Photography` (see that repo's
+1. Build and tag the new version in `~/Projects/Photography` (see that repo's
    README "Releases" section).
 2. Upload the installer(s) to `ossger/photocull-releases` as release assets
    (`gh release upload vX.Y.Z <file>`).
@@ -39,6 +39,6 @@ Static site, deployed via Cloudflare Pages (Git integration) to
 ## Where content comes from
 
 This site's copy (feature list, hotkeys, supported formats, install caveats)
-is sourced from `C:\projects\Photography`'s `README.md`, `CHANGELOG.md`, and
+is sourced from `~/Projects/Photography`'s `README.md`, `CHANGELOG.md`, and
 `packaging/README.md` — **read-only**. This project never writes to
 `Photography`; see that repo's own `CLAUDE.md` for its release process.
