@@ -69,13 +69,8 @@ const formats = [
         <h3>🍎 macOS</h3>
         <ol class="steps">
           <li>Open the downloaded <code>.dmg</code> file, then drag <strong>PhotoCull</strong> into your Applications folder.</li>
-          <li>Double-click PhotoCull. macOS will say it can't verify the app — click <strong>Done</strong> (not Move to Trash).</li>
-          <li>Open <strong>System Settings → Privacy &amp; Security</strong>, scroll down to the <strong>Security</strong> section. You'll see a message that PhotoCull was blocked — click <strong>Open Anyway</strong>, then confirm.</li>
-          <li>Double-click PhotoCull once more and confirm <strong>Open Anyway</strong>. After that, it opens normally.</li>
+          <li>Double-click PhotoCull to launch it. It's signed with a Developer ID certificate and notarized by Apple, so it opens normally — no extra steps.</li>
         </ol>
-        <p class="muted">
-          The "Open Anyway" button only appears for a little while after step 2 — if you don't see it, double-click the app again first, then go straight back to System Settings.
-        </p>
       </div>
       <div>
         <h3>🪟 Windows</h3>
@@ -97,11 +92,12 @@ const formats = [
     <div class="container measure">
       <h2>Why does my computer warn me about this?</h2>
       <p>
-        PhotoCull isn't signed with a paid Apple Developer certificate or a
-        Windows code-signing certificate. Those cost money every year, and
-        this is a small, independently-built tool — so both macOS and Windows
-        show you a warning because they can't vouch for who made it. That
-        warning is expected. It doesn't mean the app is unsafe; it means
+        The macOS build is signed with a Developer ID certificate and
+        notarized by Apple, so it opens with no warning at all. The Windows
+        build isn't signed with a paid code-signing certificate — that costs
+        money every year, and this is a small, independently-built tool — so
+        Windows shows you a warning because it can't vouch for who made it.
+        That warning is expected. It doesn't mean the app is unsafe; it means
         nobody paid to remove the warning.
       </p>
       <p>
