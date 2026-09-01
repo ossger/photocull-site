@@ -1,0 +1,113 @@
+---
+// A one-field "email me when this ships" capture for a not-yet-available
+// download card. Renders the plain static "Coming soon" badge instead when
+// no Formspree endpoint is configured (site.ts `notify.endpoint`) — see the
+// call site in index.astro. Self-contained: doesn't import website's
+// RequestHelpForm/FormEnhance — different project, different design system
+// (see this project's CLAUDE.md).
+import { siteConfig } from '../config/site';
+
+interface Props {
+  /** What's being watched, e.g. "Windows — 64-bit". Tags the Formspree lead. */
+  platform: string;
+}
+const { platform } = Astro.props;
+const { notify, url, name } = siteConfig;
+const fieldId = `notify-${platform.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<form class="notify-form" method="POST" action={notify.endpoint} data-notify-form>
+  <input type="hidden" name="_subject" value={`${name} — notify me: ${platform}`} />
+  <input type="hidden" name="_next" value={`${url}/`} />
+  <input type="hidden" name="platform" value={platform} />
+  <p class="notify-hide" aria-hidden="true">
+    <label>Leave this empty <input name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <label class="notify-label" for={fieldId}>Email me when this ships</label>
+  <div class="notify-row">
+    <input
+      id={fieldId}
+      name="email"
+      type="email"
+      required
+      autocomplete="email"
+      placeholder="you@example.com"
+      aria-label="Your email"
+    />
+    <button class="btn btn-outline" type="submit">Notify me</button>
+  </div>
+  <p class="notify-done" data-notify-done role="status" hidden>You're on the list — we'll email you.</p>
+  <p class="box box-warn notify-error" data-notify-error role="alert" tabindex="-1" hidden>
+    Something went wrong. Try again, or check the <a href={siteConfig.url + '#download'}>release notes</a> directly.
+  </p>
+</form>
+
+<script>
+  const forms = Array.from(document.querySelectorAll<HTMLFormElement>('[data-notify-form]'));
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+      const label = form.querySelector<HTMLElement>('.notify-label');
+      const done = form.querySelector<HTMLElement>('[data-notify-done]');
+      const error = form.querySelector<HTMLElement>('[data-notify-error]');
+      const buttonLabel = button?.textContent ?? '';
+      if (error) error.hidden = true;
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Sending…';
+      }
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          input?.setAttribute('hidden', '');
+          label?.setAttribute('hidden', '');
+          button?.setAttribute('hidden', '');
+          if (done) {
+            done.hidden = false;
+            done.focus?.();
+          }
+          return;
+        }
+      } catch {
+        // network error — fall through to the error box below
+      }
+
+      if (button) {
+        button.disabled = false;
+        button.textContent = buttonLabel;
+      }
+      if (error) {
+        error.hidden = false;
+        error.focus();
+      }
+    });
+  });
+</script>
+
+<style>
+  .notify-form { text-align: left; margin-top: 0.5rem; }
+  .notify-hide { position: absolute; left: -9999px; }
+  .notify-label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .notify-row { display: flex; gap: 0.5rem; }
+  .notify-row input {
+    flex: 1;
+    min-width: 0;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.6rem 0.75rem;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  .notify-row .btn { padding: 0.6rem 1rem; font-size: 0.9rem; min-height: 40px; }
+  .notify-done { color: var(--ok); font-size: 0.9rem; margin: 0.5rem 0 0; }
+  .notify-error { font-size: 0.85rem; padding: 0.75rem; margin: 0.5rem 0 0; text-align: left; }
+</style>

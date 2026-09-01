@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import NotifyMe from '../components/NotifyMe.astro';
+import { siteConfig } from '../config/site';
 import { version, releaseNotesUrl, changelogUrl, downloads, downloadUrl, type Download } from '../config/release';
+
+const { notify } = siteConfig;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -50,6 +54,11 @@ const formats = [
             <div class="label">{d.label}</div>
             {d.available ? (
               <a class="btn btn-primary" href={downloadUrl(d)}>Download</a>
+            ) : notify.endpoint ? (
+              <>
+                <span class="btn btn-disabled" aria-disabled="true">{d.note}</span>
+                <NotifyMe platform={`${d.platform} — ${d.label}`} />
+              </>
             ) : (
               <span class="btn btn-disabled" aria-disabled="true">{d.note}</span>
             )}
@@ -188,6 +197,5 @@ const formats = [
       PhotoCull {version} · <a href={releaseNotesUrl}>Release notes</a> ·{' '}
       <a href={changelogUrl}>All versions</a>
     </p>
-    <p>Part of <a href="https://infrarg.com">InfraRG</a>.</p>
   </Fragment>
 </BaseLayout>
