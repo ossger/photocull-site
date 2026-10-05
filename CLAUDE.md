@@ -20,7 +20,7 @@ Roadmap (if any): `PLAN.md`.
   components, theme, or accessibility toolbar — this site's design is
   intentionally its own (dark-first).
 - This is **not** the PhotoCull app itself. The app's source lives in
-  `~/Projects/Photography` (private repo). This project reads that repo's
+  `~/Projects/Photography` (public on GitHub, MIT, since 2026-10-05). This project reads that repo's
   `README.md`, `CHANGELOG.md`, and `packaging/README.md` for content —
   **read-only**. Never write to `Photography` from a session here; a
   correction to the app's own docs belongs in that project.
@@ -38,8 +38,9 @@ build or platform is a config edit, not a template change. See `README.md`
   run internet requirement) must stay accurate to what `Photography`'s
   `packaging/README.md` actually documents — don't soften or invent past what
   that repo states.
-- Never link to a page inside the private `Photography` repo — anyone reading
-  this site can't see it. Link to `ossger/photocull-releases` (public) instead.
+- Downloads link to `ossger/photocull-releases`. The source repo
+  (`ossger/Photography`) is public, so linking its README, issues, or
+  `BACKLOG.md` is fine.
 - Publish a SHA-256 hash for every available download, and never claim a hash
   you haven't been given for that exact file.
 
