@@ -3,7 +3,7 @@
  * on the site hardcodes a version, filename, or download URL — add a build,
  * flip `available: true`, fill in size/sha256, done.
  *
- * Source of truth for the app itself: ~/Projects/Photography (private repo).
+ * Source of truth for the app itself: ~/Projects/PhotoCull (public repo ossger/PhotoCull).
  * This project reads its README/CLAUDE.md/CHANGELOG.md for content but never
  * writes there — see photocull-site/CLAUDE.md.
  */
