@@ -10,7 +10,7 @@
 
 const REPO = 'ossger/photocull-releases';
 
-export const version = '0.3.1';
+export const version = '0.4.0';
 export const releaseNotesUrl = `https://github.com/${REPO}/releases/tag/v${version}`;
 export const changelogUrl = `https://github.com/${REPO}/releases`;
 
@@ -34,8 +34,8 @@ export const downloads: Download[] = [
     icon: '🍎',
     available: true,
     file: `PhotoCull-${version}-macOS-arm64.dmg`,
-    size: '314 MB',
-    sha256: '5c3d906e3ba9624fa4aa8afe4c98d9fe4e2b29cacdcf183db8a7da002e49f979',
+    size: '257 MB',
+    sha256: '5bd5d7d7083efb70710e1d92bfbc8758a72a59be8b5425356102e75f7b670ae0',
   },
   {
     id: 'mac-x64',
