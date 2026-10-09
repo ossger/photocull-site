@@ -1,0 +1,26 @@
+---
+// Simple line/solid glyphs for the download cards and install headings — a
+// laptop for macOS, the four-pane mark for Windows. Replaces the emoji so the
+// icons render identically on every OS and take the page's colours.
+interface Props {
+  platform: string;
+  size?: number;
+}
+const { platform, size = 28 } = Astro.props;
+const isWindows = platform.toLowerCase().startsWith('win');
+---
+
+{isWindows ? (
+  <svg class="platform-icon" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M3 5.5l7.5-1v7H3zM11.5 4.35L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.35z" />
+  </svg>
+) : (
+  <svg class="platform-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="4.5" y="5" width="15" height="10.5" rx="1.6" />
+    <path d="M2.5 18.5h19" />
+  </svg>
+)}
+
+<style>
+  .platform-icon { display: block; flex: none; }
+</style>

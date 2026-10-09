@@ -1,0 +1,106 @@
+---
+// A stylised contact sheet — the site's hero image. It is an illustration, not
+// a screenshot of the app: generic gradient frames (no real photos, T0), one
+// keeper ringed in the brand orange, a few culled. Mirrors the brand art in
+// /brand. Purely decorative, so it is hidden from assistive tech.
+type State = 'keep' | 'reject' | undefined;
+const frames: { hue: number; angle: number; light: number; sil: number; x: number; state?: State }[] = [
+  { hue: 220, angle: 126, light: 32, sil: 42, x: 19 },
+  { hue: 222, angle: 236, light: 25, sil: 31, x: 47 },
+  { hue: 218, angle: 128, light: 23, sil: 27, x: 30, state: 'reject' },
+  { hue: 220, angle: 192, light: 39, sil: 32, x: 22 },
+  { hue: 224, angle: 170, light: 40, sil: 32, x: 18 },
+  { hue: 220, angle: 157, light: 23, sil: 29, x: 41 },
+  { hue: 222, angle: 191, light: 39, sil: 30, x: 58 },
+  { hue: 218, angle: 144, light: 25, sil: 28, x: 38, state: 'reject' },
+  { hue: 220, angle: 192, light: 42, sil: 44, x: 18, state: 'keep' },
+  { hue: 222, angle: 174, light: 28, sil: 39, x: 35 },
+  { hue: 220, angle: 151, light: 40, sil: 32, x: 26 },
+  { hue: 224, angle: 183, light: 24, sil: 39, x: 36, state: 'reject' },
+  { hue: 218, angle: 135, light: 31, sil: 38, x: 47 },
+  { hue: 222, angle: 182, light: 27, sil: 26, x: 41 },
+  { hue: 220, angle: 232, light: 24, sil: 35, x: 35 },
+  { hue: 222, angle: 126, light: 32, sil: 42, x: 19 },
+  { hue: 220, angle: 236, light: 25, sil: 31, x: 47 },
+  { hue: 218, angle: 128, light: 23, sil: 27, x: 30 },
+  { hue: 220, angle: 192, light: 39, sil: 32, x: 22, state: 'reject' },
+  { hue: 224, angle: 170, light: 40, sil: 32, x: 18 },
+];
+---
+
+<div class="sheet" aria-hidden="true">
+  {frames.map((f) => (
+    <div
+      class:list={['frame', f.state]}
+      style={`background:linear-gradient(${f.angle}deg,hsl(${f.hue} 14% ${f.light}%),hsl(${f.hue + 2} 18% 12%))`}
+    >
+      <i style={`left:${f.x}%;width:${f.sil}%`}></i>
+      {f.state === 'keep' && (
+        <span class="badge">
+          <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+        </span>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .sheet {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.4rem, 1.6vw, 0.9rem);
+    -webkit-mask-image: linear-gradient(#000 52%, transparent 100%);
+    mask-image: linear-gradient(#000 52%, transparent 100%);
+  }
+  .frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    opacity: 0.6;
+  }
+  .frame i {
+    position: absolute;
+    bottom: 0;
+    height: 42%;
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 50% 50% 0 0;
+  }
+  .frame.reject::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 14, 20, 0.6);
+  }
+  .frame.keep {
+    opacity: 1;
+    z-index: 2;
+    border: 2px solid var(--brand);
+    transform: scale(1.14);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--brand) 20%, transparent),
+      0 14px 40px color-mix(in srgb, var(--brand) 38%, transparent);
+    animation: keep-in 0.9s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .badge {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 24%;
+    aspect-ratio: 1;
+    max-width: 30px;
+    border-radius: 50%;
+    background: var(--brand);
+    display: grid;
+    place-items: center;
+  }
+  .badge svg { width: 68%; fill: none; stroke: #0b0e14; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  @keyframes keep-in {
+    from { opacity: 0.6; transform: scale(1); box-shadow: none; }
+  }
+
+  @media (max-width: 640px) {
+    .frame:nth-child(n + 16) { display: none; }
+  }
+</style>

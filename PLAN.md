@@ -23,6 +23,13 @@ edit, not a rebuild.
 - [x] **M5 — App icon** (0.4.1 beta; favicon is now the mark). Once `PhotoCull` ships a real app icon (not the
       default Electron one), reflect it in the download cards / favicon.
 
+- [x] **M6 — Visual refresh** (2026-10-09). Contact-sheet hero built from the
+      brand art (`ContactSheet.astro` — an illustration, *not* an app
+      screenshot), sticky header with the mark, how-it-works row, SVG platform
+      icons, numbered install steps, keycap hotkeys, light/dark token palette.
+      Copy and facts unchanged. M4 (real screenshots) still open — when they
+      land, swap them into the hero stage in place of the illustration.
+
 ## Notes
 
 - Not gated on `PLAN.md` cadence like `website` — this is a small enough site
