@@ -10,7 +10,10 @@
 
 const REPO = 'ossger/photocull-releases';
 
-export const version = '0.4.0';
+export const version = '0.4.1';
+
+/** Public beta: shows a Beta badge and a report-issues line on the page. */
+export const beta = true;
 export const releaseNotesUrl = `https://github.com/${REPO}/releases/tag/v${version}`;
 export const changelogUrl = `https://github.com/${REPO}/releases`;
 
@@ -35,15 +38,17 @@ export const downloads: Download[] = [
     available: true,
     file: `PhotoCull-${version}-macOS-arm64.dmg`,
     size: '257 MB',
-    sha256: '5bd5d7d7083efb70710e1d92bfbc8758a72a59be8b5425356102e75f7b670ae0',
+    sha256: '6d494235808339e778d5ebdbb86aeff0607c6a1a735d5b948e1d4d9b9fbbc37c',
   },
   {
     id: 'mac-x64',
     platform: 'macOS',
     label: 'Intel',
     icon: '🍎',
-    available: false,
-    note: 'Coming soon',
+    available: true,
+    file: `PhotoCull-${version}-macOS-x64.dmg`,
+    size: '305 MB',
+    sha256: '64b347011c3bbac6568d8323cb81a81f1d1484ba7894fbfc5c3b16a7b2cc8d2e',
   },
   {
     id: 'win-x64',

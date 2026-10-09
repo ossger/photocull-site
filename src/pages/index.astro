@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NotifyMe from '../components/NotifyMe.astro';
 import { siteConfig } from '../config/site';
-import { version, releaseNotesUrl, changelogUrl, downloads, downloadUrl, type Download } from '../config/release';
+import { version, beta, releaseNotesUrl, changelogUrl, downloads, downloadUrl, type Download } from '../config/release';
 
 const { notify } = siteConfig;
 
@@ -27,6 +27,7 @@ const formats = [
   <section class="section container">
     <div class="stack measure">
       <span class="eyebrow">Free desktop app for photographers</span>
+      {beta && <span class="badge-beta">Beta</span>}
       <h1>Cull a shoot in minutes, not hours</h1>
       <p class="lead">
         PhotoCull groups a shoot into scenes, scores every frame for focus,
@@ -36,6 +37,13 @@ const formats = [
         New in 0.4: it can also find tripod star sequences, suggest which
         frames to leave out, and stack the rest into a 16-bit TIFF.
       </p>
+      {beta && (
+        <p class="muted">
+          PhotoCull is in public beta: it works, and it will have rough edges.
+          If something breaks, please{' '}
+          <a href="https://github.com/ossger/PhotoCull/issues">tell us on GitHub</a>.
+        </p>
+      )}
       <div class="tag-row" style="margin-top: 0.5rem">
         <a class="btn btn-outline" href="#download">Jump to downloads ↓</a>
       </div>
@@ -46,7 +54,7 @@ const formats = [
   <section class="section section-soft" id="download">
     <div class="container">
       <h2 class="center">Download</h2>
-      <p class="center muted">Version {version} ·{' '}
+      <p class="center muted">Version {version}{beta && ' (beta)'} ·{' '}
         <a href={releaseNotesUrl}>release notes</a></p>
       <div class="grid grid-3" style="margin-top: 2rem">
         {downloads.map((d: Download) => (
@@ -123,7 +131,7 @@ const formats = [
         </p>
       ))}
       <p class="muted">
-        On macOS: <code>shasum -a 256 PhotoCull-{version}-macOS-arm64.dmg</code>.
+        On macOS: <code>shasum -a 256 PhotoCull-{version}-macOS-arm64.dmg</code> (or <code>-x64.dmg</code> for Intel).
         On Windows: <code>certutil -hashfile PhotoCull-{version}-Windows-x64.exe SHA256</code>.
         If the hash you compute doesn't match the one above, don't install it
         — download it again from this page.
@@ -159,7 +167,7 @@ const formats = [
       <div class="grid grid-2">
         <div class="card">
           <h3>macOS</h3>
-          <p class="muted" style="margin:0">macOS 13 (Ventura) or newer. Apple Silicon (M1 and later) today; an Intel build is coming.</p>
+          <p class="muted" style="margin:0">macOS 13 (Ventura) or newer, on Apple Silicon (M1 and later) or Intel.</p>
         </div>
         <div class="card">
           <h3>Windows</h3>

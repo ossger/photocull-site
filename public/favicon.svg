@@ -1,7 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#0b0e14"/>
-  <rect x="5" y="11" width="22" height="15" rx="3" fill="#ff8a3d"/>
-  <rect x="12" y="7" width="8" height="5" rx="1.5" fill="#ff8a3d"/>
-  <circle cx="16" cy="18.5" r="5.5" fill="#0b0e14"/>
-  <circle cx="16" cy="18.5" r="3" fill="#ff8a3d"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- PhotoCull mark: a burst of frames, the keeper on top -->
+  <rect width="512" height="512" rx="112" fill="#0b0e14"/>
+  <g transform="rotate(-14 256 280)">
+    <rect x="128" y="150" width="256" height="196" rx="28" fill="#171c27" stroke="#262d3b" stroke-width="8"/>
+  </g>
+  <g transform="rotate(-6 256 280)">
+    <rect x="128" y="158" width="256" height="196" rx="28" fill="#1d2330" stroke="#3a4356" stroke-width="8"/>
+  </g>
+  <rect x="128" y="168" width="256" height="196" rx="28" fill="#ff8a3d"/>
+  <path d="M196 268 l42 42 l82 -86" fill="none" stroke="#0b0e14" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

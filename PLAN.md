@@ -14,13 +14,13 @@ edit, not a rebuild.
       "coming soon."
 - [ ] **M2 — Windows build added.** Once `PhotoCull` has a validated 0.x.y
       Windows installer: flip `win-x64` to available in `release.ts`.
-- [ ] **M3 — Intel macOS build added.** Blocked on how that build gets made
+- [x] **M3 — Intel macOS build added** (0.4.1 beta). Blocked on how that build gets made
       (CI runner vs. Rosetta) — Ross's call, tracked in `PhotoCull`'s pulse,
       not this project's problem to solve.
 - [ ] **M4 — Screenshots.** A scrubbed sample-shoot screenshot or two in the
       hero/getting-started sections, once captured (SECURITY.md T0 — no real
       library paths or personal photos visible).
-- [ ] **M5 — App icon.** Once `PhotoCull` ships a real app icon (not the
+- [x] **M5 — App icon** (0.4.1 beta; favicon is now the mark). Once `PhotoCull` ships a real app icon (not the
       default Electron one), reflect it in the download cards / favicon.
 
 ## Notes
